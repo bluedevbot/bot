@@ -1,28 +1,25 @@
-import ka as ka
 import json
 import discord
-import DiscordUtils
 from discord.ext import commands, tasks
 import os
 import asyncio
-import requests
 
 # from helpers import flags, pagination
 
-ka.keep_alive()
+# ka.keep_alive()
 
 from webscraper import GetCourse, SearchCourse
 
-token = os.environ['bot_token']
-# client = discord.Client()
+token = "MTAwMDQ4MDk5Mjg2OTQ4MjUxMA.GbvjiX.ioDJbezM5RPW8Fg9coDEJkOQmhEl39hgd9qzeM"
 
 intents = discord.Intents.default()
 intents.members = True
 intents.messages = True
+intents.message_content = True
 intents.reactions = True
 intents.typing = True
 intents.presences = True
-bot = commands.Bot(command_prefix="$", intents=intents)
+bot = commands.Bot(command_prefix=".", intents=intents)
 
 # Roles Construct
 school = [
@@ -118,7 +115,8 @@ async def info(ctx, classnumber):
         "\n" + str(details["course_title"]),
         description=c["catalog_descr"]["crse_catalog_description"],
         color=color)
-    embed.set_author(name="Duke University", icon_url=bot.user.avatar_url)
+    if bot.user:
+        embed.set_author(name="Duke University", icon_url=bot.user.display_avatar.url)
     embed.add_field(name="Course ID", value=details["course_id"], inline=True)
     embed.add_field(name="Class Number",
                     value=details["class_number"],
@@ -287,21 +285,23 @@ async def checkspots(ctx, classnumber):
     return availability["enrollment_available"]
 
 
-@bot.command()
+@bot.hybrid_command()
 async def ping(ctx):
-    if ctx.author.id == 211237550487109632:
+    if ctx.author.id in [211237550487109632,491174779278065689]:
         await ctx.send("Pong! " + str(bot.latency) + " ms")
 
 
 @bot.command()
 async def say(ctx, channel, *, msg):
-    if ctx.author.id == 211237550487109632:
-        await bot.get_channel(int(channel)).send(msg)
+    if ctx.author.id in [211237550487109632,491174779278065689]:
+        chnl = bot.get_channel(int(channel))
+        if isinstance(chnl, discord.TextChannel):
+            await chnl.send(msg)
 
 
 @bot.command()
 async def test(ctx):
-    if ctx.author.id == 211237550487109632:
+    if ctx.author.id in [211237550487109632,491174779278065689]:
         await ctx.send(bot.get_guild(923267323379474453).categories)
 
 
@@ -309,61 +309,62 @@ async def test(ctx):
 async def rerole(ctx):
     channel = bot.get_channel(rc)
     guild = bot.get_guild(923267323379474453)
-    for role in roles:
-        has_cat = ""
-        for cat in guild.categories:
-            # print(cat.name)
-            # print(role[0])
-            # print(role[0]==cat.name)
-            if role[0] == str(cat.name):
-                has_cat = cat
-        # print(has_cat)
-        if has_cat == "" and role[2] != 0:
-            await guild.create_category(name=role[0])
-        desc = ""
-        msg = await channel.fetch_message(role[1])
-        await msg.clear_reactions()
-        for i in range(3, len(role)):
-            has_ch = False
-            if role[i][3] != 0:
-                for ch in has_cat.channels:
-                    # print(cat.name)
-                    # print(role[0])
-                    # print(role[0]==cat.name)
-                    if role[i][0] == str(ch.name):
-                        has_ch = True
-                # print(has_cat)
-                if not (has_ch):
-                    mod = discord.utils.get(guild.roles, name="Moderator")
-                    privrole = discord.utils.get(guild.roles, id=role[i][1])
-                    overwrites = {
-                        guild.default_role:
-                        discord.PermissionOverwrite(read_messages=False),
-                        mod:
-                        discord.PermissionOverwrite(read_messages=True),
-                        privrole:
-                        discord.PermissionOverwrite(read_messages=True)
-                    }
-                    channel = await has_cat.create_text_channel(
-                        role[i][0], overwrites=overwrites)
-                # await cat.create_text_channel(name=role[i][0],)
-            # if role[i][0] not in guild.roles:
-            #   await guild.create_role(name=role[i][0])
-            desc += str(role[i][2]) + ": " + "<@&" + str(role[i][1]) + ">\n"
-            await msg.add_reaction(role[i][2])
-        embed = discord.Embed(title="Pick your " + str(role[0]) + "!",
-                              description=desc,
-                              color=0x00539b)
-        embed.set_footer(
-            text="React to the emojis below to self-assign the role.")
-        await msg.edit(embed=embed)
+    if guild and channel and isinstance(channel, discord.TextChannel):
+        for role in roles:
+            has_cat = ""
+            for cat in guild.categories:
+                # print(cat.name)
+                # print(role[0])
+                # print(role[0]==cat.name)
+                if role[0] == str(cat.name):
+                    has_cat = cat
+            # print(has_cat)
+            if has_cat == "" and role[2] != 0:
+                await guild.create_category(name=role[0])
+            desc = ""
+            msg = await channel.fetch_message(role[1])
+            await msg.clear_reactions()
+            for i in range(3, len(role)):
+                has_ch = False
+                if role[i][3] != 0:
+                    for ch in has_cat.channels:
+                        # print(cat.name)
+                        # print(role[0])
+                        # print(role[0]==cat.name)
+                        if role[i][0] == str(ch.name):
+                            has_ch = True
+                    # print(has_cat)
+                    if not (has_ch):
+                        mod = discord.utils.get(guild.roles, name="Moderator")
+                        privrole = discord.utils.get(guild.roles, id=role[i][1])
+                        overwrites = {
+                            guild.default_role:
+                            discord.PermissionOverwrite(read_messages=False),
+                            mod:
+                            discord.PermissionOverwrite(read_messages=True),
+                            privrole:
+                            discord.PermissionOverwrite(read_messages=True)
+                        }
+                        channel = await has_cat.create_text_channel(
+                            role[i][0], overwrites=overwrites)
+                    # await cat.create_text_channel(name=role[i][0],)
+                # if role[i][0] not in guild.roles:
+                #   await guild.create_role(name=role[i][0])
+                desc += str(role[i][2]) + ": " + "<@&" + str(role[i][1]) + ">\n"
+                await msg.add_reaction(role[i][2])
+            embed = discord.Embed(title="Pick your " + str(role[0]) + "!",
+                                  description=desc,
+                                  color=0x00539b)
+            embed.set_footer(
+                text="React to the emojis below to self-assign the role.")
+            await msg.edit(embed=embed)
 
-    await ctx.send("Role adjustments complete.")
+        await ctx.send("Role adjustments complete.")
 
 
 @bot.command()
 async def sendembed(ctx, channel):
-    if ctx.author.id == 211237550487109632:
+    if ctx.author.id in [211237550487109632,491174779278065689]:
         embed = discord.Embed(title="Embed!",
                               description="Nothing to see here.",
                               color=0x00539b)
@@ -453,17 +454,26 @@ async def myLoop():
     #         type=discord.ActivityType.watching, name="bugs"))
 
 
+@bot.command()
+async def basic(ctx: commands.Context):
+    await ctx.send("hello world")
+
 @bot.event
 async def on_ready():
     print("Ready!")
     c = bot.get_channel(rct)
     myLoop.start()
     text = "Ready!"
-    text = await c.send(text)
+    if isinstance(c, discord.TextChannel):
+        text = await c.send(text)
     # await GetCourse(3025)
-    await text.add_reaction('🏃')
+        await text.add_reaction('🏃')
 
     # asyncio.Task(StartCsgoReport())
 
 
-bot.run(token)
+async def main():
+    async with bot:
+        await bot.start(token)
+
+asyncio.run(main())
