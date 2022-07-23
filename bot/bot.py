@@ -32,5 +32,9 @@ class BlueDev(commands.Bot):
 		self.discprd_logger: logging.Logger = create_logger('discord', logging.INFO)
 		super().__init__(command_prefix=self.config['prefix'], description=self.config['description'], intents=intents)
 
+	async def setup_hook(self) -> None:
+		await self.load_extension('jishaku')
+		return await super().setup_hook()
+
 	async def commence(self):
 		self.logger.debug("Bot has started!")
