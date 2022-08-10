@@ -1,4 +1,4 @@
-FROM 3.10.5-slim-bullseye
+FROM python:3.10-slim-bullseye
 
 COPY ["pyproject.toml", "poetry.lock", "./"]
 

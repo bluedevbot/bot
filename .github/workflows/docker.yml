@@ -1,9 +1,6 @@
 name: Docker
 
-on:
-  push:
-    tags:
-      - '*'
+on: [push]
 
 jobs:
   push:
@@ -11,22 +8,13 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Docker meta
-        id: docker_meta
-        uses: crazy-max/ghaction-docker-meta@v1
-        with:
-          images: ghcr.io/daggy1234/dagbot
-          tag-semver: |
-            {{version}}
-            {{major}}.{{minor}}
+        uses: actions/checkout@v3
       -
         name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       -
         name: Cache Docker layers
         uses: actions/cache@v2.1.4
@@ -47,9 +35,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          platforms: linux/amd64
+          tags: ghcr.io/bluedevbot/bot:latest
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
