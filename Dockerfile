@@ -14,4 +14,6 @@ COPY . .
 
 WORKDIR /
 
+RUN ls
+
 CMD ["python -m bot"]
