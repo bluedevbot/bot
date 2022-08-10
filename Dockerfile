@@ -1,4 +1,4 @@
-FROM python:3.9-slim-bullseye
+FROM python:3.9-slim-buster
 
 COPY ["pyproject.toml", "poetry.lock", "./"]
 
@@ -16,4 +16,4 @@ WORKDIR /
 
 RUN ls
 
-CMD ["python -m bot"]
+CMD ["python3 -m bot"]
