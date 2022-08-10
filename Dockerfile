@@ -14,4 +14,4 @@ COPY . .
 
 WORKDIR /
 
-CMD ["python3 -m bot"]
+CMD ["python -m bot"]
