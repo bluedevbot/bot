@@ -14,6 +14,9 @@ COPY . .
 
 WORKDIR /
 
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
 RUN ls
 
-CMD ["python3 -m bot"]
+CMD ["/start.sh"]
