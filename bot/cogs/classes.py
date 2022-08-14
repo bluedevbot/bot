@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import tasks, commands
 from bot.bot import BlueDev
 import requests
 import asyncio
@@ -26,6 +26,7 @@ class Classes(commands.Cog):
 
     def __init__(self, bot: BlueDev) -> None:
         self.bot = bot
+        self.classLoop.start()
 
     async def GetCourse(self, cid):
         url = f"https://dukehub.duke.edu/psc/CSPRD01/EMPLOYEE/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassDetails?institution=DUKEU&term=1820&class_nbr={cid}"
@@ -229,6 +230,39 @@ class Classes(commands.Cog):
         )
         return availability["enrollment_available"]
 
+    def cog_unload(self):
+        self.classLoop.cancel()
+
+    @tasks.loop(seconds=60)  # repeat after every 10 seconds
+    async def classLoop():
+        with open("dukehub/cid.json") as infile:
+            cid = json.load(infile)
+        for key in cid.keys():
+            clist = await self.GetCourse(int(key))
+            print(f"Checking {key}")
+            if "error" in clist.keys():
+                return 0
+            c = clist["section_info"]
+            availability = c["class_availability"]
+            spots = availability["enrollment_available"]
+            if spots > 0:
+                print(f"Enrollment available for {key}!")
+                for uid in cid[key]:
+                    guild = bot.get_guild(923267323379474453)
+                    member = guild.get_member(int(uid))
+                    await member.send(f"Enrollment available for {key}!")
+                guild = bot.get_guild(923267323379474453)
+                member = guild.get_member(211237550487109632)
+                await member.send(f"Enrollment available for {key}!")
+            await asyncio.sleep(1)
+        # await bot.change_presence(activity=discord.Activity(
+        #         type=discord.ActivityType.watching, name="bugs"))
+
+
+    @classLoop.before_loop
+    async def before_class(self):
+        print('waiting...')
+        await self.bot.wait_until_ready()
     
 
 async def setup(bot: BlueDev):
