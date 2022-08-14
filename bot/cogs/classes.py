@@ -234,7 +234,7 @@ class Classes(commands.Cog):
         self.classLoop.cancel()
 
     @tasks.loop(seconds=60)  # repeat after every 10 seconds
-    async def classLoop():
+    async def classLoop(self):
         with open("dukehub/cid.json") as infile:
             cid = json.load(infile)
         for key in cid.keys():
