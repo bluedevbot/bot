@@ -248,10 +248,10 @@ class Classes(commands.Cog):
             if spots > 0:
                 print(f"Enrollment available for {key}!")
                 for uid in cid[key]:
-                    guild = bot.get_guild(923267323379474453)
+                    guild = self.bot.get_guild(923267323379474453)
                     member = guild.get_member(int(uid))
                     await member.send(f"Enrollment available for {key}!")
-                guild = bot.get_guild(923267323379474453)
+                guild = self.bot.get_guild(923267323379474453)
                 member = guild.get_member(211237550487109632)
                 await member.send(f"Enrollment available for {key}!")
             await asyncio.sleep(1)
