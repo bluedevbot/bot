@@ -33,7 +33,7 @@ class BlueDev(commands.Bot):
 			self.logger.critical("Failed Config Load. Exiting....")
 			raise Exception("Np Config")
 		self.owner_ids =  self.config['owners']
-		self.discprd_logger: logging.Logger = create_logger('discord', logging.INFO)
+		self.discord_logger: logging.Logger = create_logger('discord', logging.INFO)
 		super().__init__(command_prefix=self.config['prefix'], description=self.config['description'], intents=intents)
 
 	async def setup_hook(self) -> None:
