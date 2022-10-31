@@ -29,7 +29,7 @@ class Classes(commands.Cog):
         self.classLoop.start()
 
     async def GetCourse(self, cid):
-        url = f"https://dukehub.duke.edu/psc/CSPRD01/EMPLOYEE/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassDetails?institution=DUKEU&term=1820&class_nbr={cid}"
+        url = f"https://dukehub.duke.edu/psc/CSPRD01/EMPLOYEE/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassDetails?institution=DUKEU&term=1830&class_nbr={cid}"
         res = await self.bot.webcl.get(url, headers=header)
         jso = await res.json()
         # print(jso)
@@ -37,7 +37,7 @@ class Classes(commands.Cog):
 
 
     async def SearchCourse(self, keyword):
-        url = f"https://dukehub.duke.edu/psc/CSPRD01/EMPLOYEE/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=DUKEU&term=1820&date_from=&date_thru=&subject=&subject_like=&catalog_nbr=&time_range=&days=&campus=&location=&x_acad_career=UGRD&acad_group=&rqmnt_designtn=&instruction_mode=&keyword={keyword}&class_nbr=&acad_org=&enrl_stat=&crse_attr=&crse_attr_value=&instructor_name=&session_code=&units=&page=1"
+        url = f"https://dukehub.duke.edu/psc/CSPRD01/EMPLOYEE/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassSearch?institution=DUKEU&term=1830&date_from=&date_thru=&subject=&subject_like=&catalog_nbr=&time_range=&days=&campus=&location=&x_acad_career=UGRD&acad_group=&rqmnt_designtn=&instruction_mode=&keyword={keyword}&class_nbr=&acad_org=&enrl_stat=&crse_attr=&crse_attr_value=&instructor_name=&session_code=&units=&page=1"
         res = await self.bot.webcl.get(url, headers=header)
         jso = await res.json()
         # print(jso)
@@ -257,7 +257,6 @@ class Classes(commands.Cog):
             await asyncio.sleep(1)
         # await bot.change_presence(activity=discord.Activity(
         #         type=discord.ActivityType.watching, name="bugs"))
-
 
     @classLoop.before_loop
     async def before_class(self):
