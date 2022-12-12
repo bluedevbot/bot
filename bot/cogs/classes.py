@@ -233,7 +233,7 @@ class Classes(commands.Cog):
     def cog_unload(self):
         self.classLoop.cancel()
 
-    @tasks.loop(seconds=5)  # repeat after every 10 seconds
+    @tasks.loop(seconds=30)  # repeat after every 10 seconds
     async def classLoop(self):
         with open("dukehub/cid.json") as infile:
             cid = json.load(infile)
@@ -250,7 +250,7 @@ class Classes(commands.Cog):
                 for uid in cid[key]:
                     guild = self.bot.get_guild(923267323379474453)
                     member = guild.get_member(int(uid))
-                    # await member.send(f"Enrollment available for {key}!")
+                    await member.send(f"Enrollment available for {key}!")
                 guild = self.bot.get_guild(923267323379474453)
                 member = guild.get_member(211237550487109632)
                 await member.send(f"Enrollment available for {key}!")
