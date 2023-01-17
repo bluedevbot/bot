@@ -14,26 +14,7 @@ school = [
     ["Bottos", 972204300447150220, "👍", 0],
 ]
 
-focus = [
-    "Focus Groups",
-    989217923618971699,
-    1,
-    ["cogneuro-and-law", 972763711221674014, "🧠", 1],
-    ["ethics-leadership-and-global-citizenship", 972763864418615326, "🗣️", 1],
-    ["geopolitics-and-culture", 972764119885287445, "🌐", 1],
-    ["global-energy", 972764161652195338, "🔋", 1],
-    ["global-health", 972764195382779934, "😷", 1],
-    ["humanitarian-challenges", 972764237166444594, "👥", 1],
-    ["service-of-society", 972764285841338368, "📚", 1],
-    ["medicine-ethics-and-health-policy", 972764389071540284, "⚕️", 1],
-    ["modeling-in-economic-and-social-sciences", 972764418846887967, "💹", 1],
-    ["science-and-the-public", 972764462228598854, "🧪", 1],
-    ["virtual-realities", 972764733725900870, "🎮", 1],
-    ["renaissance", 972764498765185065, "🖼️", 1],
-    ["music-and-the-arts", 972764641027575828, "🎼", 1],
-    ["american-experiences", 972764608362323999, "🇺🇸", 1],
-    ["visions-of-freedom", 972764764482719744, "📣", 1],
-]
+
 
 games = [
     "Games", 989230831803445258, 1,
@@ -52,18 +33,25 @@ games = [
 ]
 
 courses = [
-    "Courses", 997216034828329041, 1, ["cs-201", 997214533858897961, "💻", 1],
+    "Courses", 997216034828329041, 1, 
+    ["cs-201", 997214533858897961, "💻", 1],
     ["chem-101", 997217964795383818, "🧪", 1],
     ["psy-101", 997218047297323059, "🧠", 1],
     ["econ-201", 997224230326386728, "🪙", 1],
     ["math-221", 998794827615436912, "⚖️", 1],
-    ["stats-199", 998794900466315356, "💵", 1]
+    ["stats-199", 998794900466315356, "💵", 1],
+    ["cs-230",1059141851917070356,"📊",1],
+    ["cs-250",1038186586422137012,"💾",1],
+    ["econ-101",1038186636044947516,"💰",1],
+    ["math-230",1064936974550581308,"➗",1],
+    ["math-212",1064936979281752135,"🧮",1],
+    ["math-219",1064939078107279390,"🫥",1],
+    ["math-218",1064937359487008808,"➕",1],
 ]
 
 rct = 988977829846859816
 rc = 932214936573181963
-# roles = [school,focus]
-roles = [games, courses]
+roles = [school, games, courses]
 
 class ReactionRoles(commands.Cog):
 
@@ -156,8 +144,9 @@ class ReactionRoles(commands.Cog):
                                 privrole:
                                 discord.PermissionOverwrite(read_messages=True)
                             }
-                            channel = await has_cat.create_text_channel(
-                                role[i][0], overwrites=overwrites)
+                            if isinstance(has_cat, discord.CategoryChannel):
+                                channel = await has_cat.create_text_channel(
+                                    role[i][0], overwrites=overwrites)
                         # await cat.create_text_channel(name=role[i][0],)
                     # if role[i][0] not in guild.roles:
                     #   await guild.create_role(name=role[i][0])
