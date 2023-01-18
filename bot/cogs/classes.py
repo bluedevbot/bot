@@ -239,7 +239,7 @@ class Classes(commands.Cog):
             cid = json.load(infile)
         for key in cid.keys():
             clist = await self.GetCourse(int(key))
-            print(f"Checking {key}")
+            # print(f"Checking {key}")
             if "error" in clist.keys():
                 return 0
             c = clist["section_info"]
