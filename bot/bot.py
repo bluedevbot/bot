@@ -34,8 +34,8 @@ class BlueDev(commands.Bot):
 			raise Exception("Np Config")
 		self.owner_ids =  self.config['owners']
 		self.discord_logger: logging.Logger = create_logger('discord', logging.INFO)
-		self.owner_ids = {491174779278065689, 211237550487109632}
-		super().__init__(command_prefix=self.config['prefix'], description=self.config['description'], intents=intents)
+		self.owner_ids = set([491174779278065689, 211237550487109632])
+		super().__init__(command_prefix=self.config['prefix'], description=self.config['description'], intents=intents, owner_ids=self.owner_ids)
 
 	async def setup_hook(self) -> None:
 		await self.load_extension('jishaku')
