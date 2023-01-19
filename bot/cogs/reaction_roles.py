@@ -51,7 +51,7 @@ courses = [
 
 rct = 988977829846859816
 rc = 932214936573181963
-roles = [school, games, courses]
+roles = [games, courses]
 
 class ReactionRoles(commands.Cog):
 
