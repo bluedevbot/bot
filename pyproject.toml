@@ -5,10 +5,8 @@ description = ""
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.8.0,<3.10"
+python = ">=3.11.0"
 numpy = "^1.22.2"
-replit = "^3.2.4"
-Flask = "^2.1.2"
 requests = "^2.28.0"
 selenium = "^4.3.0"
 google-api-python-client = "^2.52.0"
