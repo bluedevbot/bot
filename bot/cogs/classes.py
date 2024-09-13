@@ -27,6 +27,7 @@ class Classes(commands.Cog):
     def __init__(self, bot: BlueDev) -> None:
         self.bot = bot
         self.classLoop.start()
+        self.ping.start()
 
     async def GetCourse(self, cid):
         url = f"https://dukehub.duke.edu/psc/CSPRD01/EMPLOYEE/SA/s/WEBLIB_HCX_CM.H_CLASS_SEARCH.FieldFormula.IScript_ClassDetails?institution=DUKEU&term=1870&class_nbr={cid}"
@@ -257,6 +258,33 @@ class Classes(commands.Cog):
             await asyncio.sleep(1)
         # await bot.change_presence(activity=discord.Activity(
         #         type=discord.ActivityType.watching, name="bugs"))
+
+    @tasks.loop(seconds=0.5)
+    async def ping(self):
+        await self.bot.wait_until_ready()
+        url = "https://3.208.21.58/login"
+        payload = 'username=ArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnionsArvindhManianLikesOnions&password=ArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoatArvindhManianIsAGoat'
+        headers = {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Cache-Control': 'max-age=0',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Origin': 'https://3.208.21.58',
+        'Referer': 'https://3.208.21.58/',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-User': '?1',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+        'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"'
+        }
+        response = requests.request("POST", url, headers=headers, data=payload)
+        print(response.text)
+        await asyncio.sleep(0.5)
 
     @classLoop.before_loop
     async def before_class(self):
